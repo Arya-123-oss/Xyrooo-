@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>XYRO OTP | Auto Deposit & Virtual Number</title>
+    <title>XYRO OTP | Auto Deposit & Virtual Number | API Global Support</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
@@ -33,9 +33,9 @@
         .feature-card i { font-size: 50px; color: #667eea; margin-bottom: 20px; }
         .footer { background: #1a1a2e; color: white; text-align: center; padding: 40px; }
 
-        /* Modal Auth */
+        /* Modal */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
-        .modal-content { background: white; border-radius: 32px; padding: 35px; max-width: 450px; width: 90%; }
+        .modal-content { background: white; border-radius: 32px; padding: 35px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
         .auth-input { width: 100%; padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 24px; font-size: 16px; margin-bottom: 16px; }
         .auth-input:focus { outline: none; border-color: #667eea; }
         .auth-btn { width: 100%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 14px; border-radius: 32px; font-weight: 700; cursor: pointer; }
@@ -53,15 +53,15 @@
         .tab-btn { background: white; border: none; padding: 12px 28px; border-radius: 40px; cursor: pointer; font-weight: 600; color: #4a5568; transition: 0.3s; }
         .tab-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
         
-        .server-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .server-card { background: white; border-radius: 20px; padding: 18px; text-align: center; cursor: pointer; transition: 0.3s; border: 2px solid transparent; }
-        .server-card.active { border-color: #667eea; background: linear-gradient(135deg, #667eea10, #764ba210); }
-        .server-card.disabled { opacity: 0.5; cursor: not-allowed; background: #e2e8f0; }
-        
+        .server-grid, .country-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .server-card, .country-card { background: white; border-radius: 20px; padding: 18px; text-align: center; cursor: pointer; transition: 0.3s; border: 2px solid transparent; }
+        .server-card.active, .country-card.active { border-color: #667eea; background: linear-gradient(135deg, #667eea10, #764ba210); }
+        .smm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .smm-card { background: white; border-radius: 20px; padding: 18px; text-align: center; cursor: pointer; transition: 0.3s; border: 1px solid #e2e8f0; }
+        .smm-card.selected { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
         .service-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; margin-bottom: 30px; }
         .service-card { background: white; border-radius: 20px; padding: 18px; cursor: pointer; text-align: center; transition: 0.3s; border: 1px solid #e2e8f0; }
         .service-card.selected { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
-        .service-card.disabled { opacity: 0.5; cursor: not-allowed; background: #f1f5f9; }
         
         .order-section { background: white; border-radius: 24px; padding: 25px; margin-top: 20px; }
         .info-box { background: #fef3c7; padding: 20px; border-radius: 20px; text-align: center; margin: 15px 0; }
@@ -69,41 +69,44 @@
         .success-box { background: #10b981; color: white; padding: 20px; border-radius: 20px; text-align: center; margin: 15px 0; }
         .failed-box { background: #ef4444; color: white; padding: 20px; border-radius: 20px; text-align: center; margin: 15px 0; }
         .btn-order { width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 15px; border-radius: 40px; font-weight: 700; cursor: pointer; }
-        .btn-order:disabled { opacity: 0.5; cursor: not-allowed; }
         
+        .api-doc { background: #1a1a2e; border-radius: 24px; padding: 25px; color: white; margin-top: 20px; }
+        .api-doc h3 { color: #00ff88; margin-bottom: 15px; }
+        .api-doc code { background: #0f0f1a; padding: 15px; border-radius: 16px; display: block; font-family: monospace; font-size: 12px; overflow-x: auto; margin: 10px 0; color: #00ff88; white-space: pre-wrap; }
+        .api-key-display { background: #0f0f1a; padding: 10px 15px; border-radius: 20px; font-family: monospace; font-size: 14px; margin: 10px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .copy-btn { background: #667eea; border: none; padding: 5px 15px; border-radius: 20px; cursor: pointer; color: white; }
         .activity-log { background: white; border-radius: 20px; padding: 20px; max-height: 400px; overflow-y: auto; }
         .activity-item { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 13px; }
         .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e2e8f0; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        @media (max-width: 768px) { .navbar, .hero { padding: 20px; } .hero-content h1 { font-size: 2rem; } }
-        
         .deposit-area { text-align: center; }
         #qrcodeDeposit { display: inline-flex; justify-content: center; padding: 15px; background: white; border-radius: 20px; margin: 20px 0; }
+        
+        @media (max-width: 768px) { .navbar, .hero { padding: 20px; } .hero-content h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
     <!-- Landing Page -->
     <div id="landingPage" class="landing-page">
         <div class="navbar">
-            <div class="logo"><div class="logo-icon"><i class="fas fa-bolt"></i></div><div><h1>XYRO OTP</h1><p>Auto Deposit & Virtual Number</p></div></div>
-            <div class="nav-links"><a onclick="scrollToSection('home')">Beranda</a><a onclick="scrollToSection('features')">Fitur</a><a class="btn-login-nav" onclick="openLoginModal()">Login</a></div>
+            <div class="logo"><div class="logo-icon"><i class="fas fa-bolt"></i></div><div><h1>XYRO OTP</h1><p>Global OTP & SMM API</p></div></div>
+            <div class="nav-links"><a onclick="scrollToSection('home')">Beranda</a><a onclick="scrollToSection('features')">Fitur</a><a onclick="showApiDocsLanding()">Docs API</a><a class="btn-login-nav" onclick="openLoginModal()">Login</a></div>
         </div>
         <div class="hero">
-            <div class="hero-content"><h1>Beli Nomor Virtual<br>Auto OTP & Refund</h1><p>Platform terpercaya untuk kebutuhan verifikasi OTP dengan auto refund jika gagal</p>
-                <div class="hero-buttons"><button class="btn-primary" onclick="openLoginModal()">PESAN SEKARANG</button></div>
+            <div class="hero-content"><h1>Global OTP & SMM<br>Support All Countries</h1><p>Platform lengkap OTP semua negara + Social Media Marketing dengan API Real</p>
+                <div class="hero-buttons"><button class="btn-primary" onclick="openLoginModal()">PESAN SEKARANG</button><button class="btn-outline" onclick="showApiDocsLanding()">DOCS API</button></div>
             </div>
-            <div class="hero-image"><i class="fas fa-phone-alt"></i></div>
+            <div class="hero-image"><i class="fas fa-globe-asia"></i></div>
         </div>
         <div class="features" id="features"><h2>Fitur Unggulan</h2>
             <div class="feature-grid">
-                <div class="feature-card"><i class="fas fa-wallet"></i><h3>Auto Deposit</h3><p>Saldo langsung masuk setelah scan QRIS</p></div>
-                <div class="feature-card"><i class="fas fa-phone"></i><h3>Virtual Number</h3><p>Nomor instan siap terima OTP</p></div>
-                <div class="feature-card"><i class="fas fa-undo-alt"></i><h3>Auto Refund</h3><p>OTP gagal, saldo dikembalikan</p></div>
-                <div class="feature-card"><i class="fas fa-tachometer-alt"></i><h3>10 Server</h3><p>Pilihan server terbaik</p></div>
+                <div class="feature-card"><i class="fas fa-globe"></i><h3>All Countries</h3><p>Support OTP semua negara</p></div>
+                <div class="feature-card"><i class="fas fa-code"></i><h3>REST API</h3><p>Endpoint lengkap untuk developer</p></div>
+                <div class="feature-card"><i class="fas fa-chart-line"></i><h3>SMM Panel</h3><p>Followers, Likes, Views</p></div>
+                <div class="feature-card"><i class="fas fa-undo-alt"></i><h3>Auto Refund</h3><p>Garansi OTP gagal refund</p></div>
             </div>
         </div>
-        <div class="footer"><p>&copy; 2024 XYRO OTP | Auto Deposit | Auto Refund | Virtual Number</p></div>
+        <div class="footer"><p>&copy; 2024 XYRO OTP | Global OTP & SMM API | Support All Countries</p></div>
     </div>
 
     <!-- Auth Modal -->
@@ -112,50 +115,134 @@
         <div id="registerForm" style="display:none;"><input type="text" id="regUsername" class="auth-input" placeholder="Username"><input type="email" id="regEmail" class="auth-input" placeholder="Email"><input type="password" id="regPassword" class="auth-input" placeholder="Password (min 6)"><button class="auth-btn" onclick="handleRegister()">Daftar</button><div style="text-align:center; margin-top:15px;">Sudah punya akun? <a onclick="showLoginForm()" style="color:#667eea; cursor:pointer;">Login</a></div></div>
     </div></div>
 
+    <!-- API Docs Modal -->
+    <div id="apiDocsModal" class="modal"><div class="modal-content" style="max-width: 700px;"><span class="close-modal" onclick="closeApiDocsModal()">&times;</span><div class="modal-header"><h2><i class="fas fa-code"></i> API Documentation XYRO OTP</h2></div>
+        <div class="api-doc" style="background:#f8fafc; color:#1a1a2e; margin-top:0;">
+            <h3 style="color:#667eea;">🌐 Base URL</h3>
+            <code>https://xyro-otp.api/v1</code>
+            <h3 style="color:#667eea; margin-top:20px;">🔑 Authentication</h3>
+            <code>Headers: { "X-API-Key": "YOUR_API_KEY", "Content-Type": "application/json" }</code>
+            <h3 style="color:#667eea; margin-top:20px;">📨 Send OTP (All Countries)</h3>
+            <code>POST /send-otp
+Body: {
+  "service": "whatsapp|telegram|google|instagram",
+  "country": "id|us|gb|sg|my|in|ph|th|vn",
+  "server": 1-10
+}
+Response: {
+  "status": "success",
+  "order_id": "XYR123456",
+  "phone": "628123456789",
+  "otp": "123456"
+}</code>
+            <h3 style="color:#667eea; margin-top:20px;">📊 SMM Order</h3>
+            <code>POST /smm/order
+Body: {
+  "service": "instagram_followers|tiktok_followers|facebook_likes|youtube_subscribers",
+  "target": "username_or_url",
+  "quantity": 1000
+}</code>
+            <h3 style="color:#667eea; margin-top:20px;">💰 Check Balance</h3>
+            <code>GET /balance</code>
+            <h3 style="color:#667eea; margin-top:20px;">🌍 Available Countries</h3>
+            <code>GET /countries</code>
+            <p style="margin-top:20px;">📞 Support: wa.me/628123456789 | Telegram: @xyrosupport</p>
+        </div>
+    </div></div>
+
     <!-- Dashboard -->
     <div id="dashboard" class="dashboard"><div class="dashboard-container">
-        <div class="top-bar"><div class="logo" style="color:#1a1a2e;"><div class="logo-icon" style="background:linear-gradient(135deg, #667eea, #764ba2); color:white;"><i class="fas fa-bolt"></i></div><div><h2 style="font-size:1.3rem;">XYRO OTP</h2><small>Auto Deposit & Refund</small></div></div>
+        <div class="top-bar"><div class="logo" style="color:#1a1a2e;"><div class="logo-icon" style="background:linear-gradient(135deg, #667eea, #764ba2); color:white;"><i class="fas fa-bolt"></i></div><div><h2 style="font-size:1.3rem;">XYRO OTP</h2><small>Global OTP & SMM API</small></div></div>
         <div style="display:flex; gap:15px; align-items:center;"><div class="balance-card">💰 Saldo: Rp <span id="dashBalance">0</span></div><button class="logout-btn" onclick="logout()">Logout</button></div></div>
 
-        <div class="nav-tabs"><button class="tab-btn active" data-tab="home">🏠 Home</button><button class="tab-btn" data-tab="deposit">💳 Deposit</button><button class="tab-btn" data-tab="buy">📱 Buy Number</button><button class="tab-btn" data-tab="history">📋 History</button><button class="tab-btn" data-tab="profile">👤 Profile</button></div>
+        <div class="nav-tabs"><button class="tab-btn active" data-tab="home">🏠 Home</button><button class="tab-btn" data-tab="deposit">💳 Deposit</button><button class="tab-btn" data-tab="otp">📱 OTP Global</button><button class="tab-btn" data-tab="smm">📊 SMM Panel</button><button class="tab-btn" data-tab="api">🔑 API Key</button><button class="tab-btn" data-tab="history">📋 History</button><button class="tab-btn" data-tab="profile">👤 Profile</button></div>
 
         <!-- Home Tab -->
-        <div id="tab-home" class="tab-content"><div style="background:linear-gradient(135deg, #667eea, #764ba2); border-radius:24px; padding:30px; color:white; margin-bottom:25px;"><h2>XYRO OTP</h2><p>Beli Nomor Virtual | Auto Terima OTP | Auto Refund Jika Gagal</p><button class="btn-primary" style="background:white; color:#667eea; margin-top:15px;" onclick="switchTab('buy')">Beli Sekarang</button></div>
-        <div class="activity-log"><h3>📢 Panduan</h3><div class="activity-item">1. Deposit saldo minimal Rp 10.000 via QRIS</div><div class="activity-item">2. Pilih server (1-10) dan layanan (WhatsApp/Telegram/dll)</div><div class="activity-item">3. Klik "Beli Nomor" - nomor virtual akan muncul</div><div class="activity-item">4. Tunggu OTP masuk - jika gagal saldo auto refund</div></div></div>
+        <div id="tab-home" class="tab-content"><div style="background:linear-gradient(135deg, #667eea, #764ba2); border-radius:24px; padding:30px; color:white; margin-bottom:25px;"><h2>XYRO OTP - Global Services</h2><p>Support OTP Semua Negara | SMM Panel | API Real</p><button class="btn-primary" style="background:white; color:#667eea; margin-top:15px;" onclick="switchTab('otp')">Order OTP</button><button class="btn-outline" style="border-color:white; color:white; margin-left:10px;" onclick="switchTab('smm')">Order SMM</button></div>
+        <div class="activity-log"><h3>📢 Layanan Tersedia</h3><div class="activity-item">🌍 OTP Support: Indonesia, US, UK, Singapore, Malaysia, India, Philippines, Thailand, Vietnam</div><div class="activity-item">📊 SMM: Instagram, TikTok, Facebook, YouTube, Twitter</div><div class="activity-item">🔑 Dapatkan API Key untuk integrasi bot/aplikasi</div><div class="activity-item">💰 Auto refund jika OTP gagal dalam 60 detik</div></div></div>
 
         <!-- Deposit Tab -->
-        <div id="tab-deposit" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px; text-align:center;"><h3>Deposit Saldo via QRIS</h3><p>Minimal: Rp 10.000 | Auto masuk setelah transfer</p><div id="qrcodeDeposit"></div><input type="number" id="depositAmount" class="auth-input" placeholder="Nominal Deposit" style="margin:15px 0;"><button class="btn-primary" onclick="processDeposit()">Generate QRIS & Deposit</button><div id="depositMsg" style="margin-top:15px;"></div><div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:20px;"><p><i class="fas fa-info-circle"></i> Format QRIS yang benar:</p><code style="display:block; font-size:11px;">QRIS://merchant?mid=123456&name=XYRO_OTP&amount=10000</code></div></div></div>
+        <div id="tab-deposit" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px; text-align:center;"><h3>Deposit Saldo via QRIS</h3><p>Minimal: Rp 10.000 | Auto masuk setelah transfer</p><div id="qrcodeDeposit"></div><input type="number" id="depositAmount" class="auth-input" placeholder="Nominal Deposit" style="margin:15px 0;"><button class="btn-primary" onclick="processDeposit()">Generate QRIS & Deposit</button><div id="depositMsg" style="margin-top:15px;"></div></div></div>
 
-        <!-- Buy Number Tab -->
-        <div id="tab-buy" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>📱 Beli Nomor Virtual</h3><div class="server-grid" id="serverGrid"></div><div class="service-grid" id="serviceGrid"></div><div class="order-section"><div id="orderLoading" style="display:none; text-align:center; padding:20px;"><div class="loading"></div> Memproses order...</div><div id="orderResult"></div><button id="orderBtn" class="btn-order" onclick="placeOrder()">Beli Nomor Sekarang</button></div></div></div>
+        <!-- OTP Global Tab -->
+        <div id="tab-otp" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>📱 Order OTP Global</h3><div class="server-grid" id="serverGrid"></div><div class="country-grid" id="countryGrid"></div><div class="service-grid" id="otpServiceGrid"></div><div class="order-section"><div id="otpOrderLoading" style="display:none; text-align:center; padding:20px;"><div class="loading"></div> Memproses order...</div><div id="otpOrderResult"></div><button id="otpOrderBtn" class="btn-order" onclick="placeOtpOrder()">Beli Nomor Sekarang</button></div></div></div>
+
+        <!-- SMM Panel Tab -->
+        <div id="tab-smm" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>📊 Social Media Marketing</h3><div class="smm-grid" id="smmCategoryGrid"></div><div id="smmServiceGrid" class="service-grid"></div><div class="order-section"><input type="text" id="smmTarget" class="auth-input" placeholder="Target (Username/URL/ID)"><input type="number" id="smmQuantity" class="auth-input" placeholder="Jumlah"><div id="smmPriceInfo" style="margin:10px 0; padding:10px; background:#f1f5f9; border-radius:16px;"></div><button class="btn-order" onclick="placeSmmOrder()">Order SMM Sekarang</button><div id="smmOrderResult"></div></div></div></div>
+
+        <!-- API Key Tab -->
+        <div id="tab-api" class="tab-content" style="display:none;"><div class="api-doc"><h3><i class="fas fa-key"></i> API Key Pribadi Anda</h3><div class="api-key-display"><span id="dashboardApiKey" style="color:#00ff88;">-</span><button class="copy-btn" onclick="copyDashboardApiKey()">Salin API Key</button></div>
+        <h3>🌐 Base URL API</h3><code>https://xyro-otp.api/v1</code>
+        <h3>📨 Send OTP (All Countries)</h3><code>POST /send-otp
+{
+  "service": "whatsapp",
+  "country": "id",
+  "server": 2
+}</code>
+        <h3>📊 SMM Order</h3><code>POST /smm/order
+{
+  "service": "instagram_followers",
+  "target": "username",
+  "quantity": 1000
+}</code>
+        <h3>🌍 Available Countries</h3><code>GET /countries</code>
+        <h3>💰 Check Balance</h3><code>GET /balance</code>
+        <p style="margin-top:20px;">✅ API Real - Support cURL, Python, JavaScript, Postman</p></div></div>
 
         <!-- History Tab -->
         <div id="tab-history" class="tab-content" style="display:none;"><div class="activity-log" id="historyList"><div class="activity-item">Belum ada transaksi</div></div></div>
 
         <!-- Profile Tab -->
-        <div id="tab-profile" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>Profil Saya</h3><p><strong>Username:</strong> <span id="profileUsername"></span></p><p><strong>Email:</strong> <span id="profileEmail"></span></p><p><strong>Total Deposit:</strong> Rp <span id="profileTotalDeposit">0</span></p><p><strong>Total Order:</strong> <span id="profileTotalOrder">0</span></p><p><strong>Total Refund:</strong> Rp <span id="profileTotalRefund">0</span></p><hr style="margin:20px 0;"><h4>📞 Kontak Support</h4><p>WhatsApp: <a href="https://wa.me/628123456789">+62 812-3456-789</a></p></div></div>
+        <div id="tab-profile" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>Profil Saya</h3><p><strong>Username:</strong> <span id="profileUsername"></span></p><p><strong>Email:</strong> <span id="profileEmail"></span></p><p><strong>Total Deposit:</strong> Rp <span id="profileTotalDeposit">0</span></p><p><strong>Total Order:</strong> <span id="profileTotalOrder">0</span></p><p><strong>Total Refund:</strong> Rp <span id="profileTotalRefund">0</span></p><p><strong>API Key:</strong> <span id="profileApiKey" style="font-family:monospace;">-</span></p><hr style="margin:20px 0;"><h4>📞 Kontak Support</h4><p>WhatsApp: <a href="https://wa.me/628123456789">+62 812-3456-789</a></p><p>Telegram: <a href="https://t.me/xyrosupport">@xyrosupport</a></p></div></div>
     </div></div>
 
     <script>
         let currentUser = null;
         let selectedServer = null;
-        let selectedService = null;
-        let activeOrder = null;
+        let selectedCountry = 'id';
+        let selectedOtpService = null;
+        let selectedSmmCategory = null;
+        let selectedSmmService = null;
         let refundTotal = 0;
 
-        // Services Data
-        const servicesList = [
-            { id: 1, name: "WhatsApp", price: 2500, icon: "fab fa-whatsapp", enabled: true },
-            { id: 2, name: "Telegram", price: 2200, icon: "fab fa-telegram", enabled: true },
-            { id: 3, name: "Google", price: 2000, icon: "fab fa-google", enabled: true },
-            { id: 4, name: "Instagram", price: 2800, icon: "fab fa-instagram", enabled: true },
-            { id: 5, name: "Facebook", price: 2500, icon: "fab fa-facebook", enabled: true },
-            { id: 6, name: "TikTok", price: 3000, icon: "fab fa-tiktok", enabled: true },
-            { id: 7, name: "Twitter", price: 2300, icon: "fab fa-twitter", enabled: true },
-            { id: 8, name: "Discord", price: 2700, icon: "fab fa-discord", enabled: true }
+        // Countries Data
+        const countries = [
+            { code: "id", name: "Indonesia", flag: "🇮🇩", price: 2500 },
+            { code: "us", name: "United States", flag: "🇺🇸", price: 5000 },
+            { code: "gb", name: "United Kingdom", flag: "🇬🇧", price: 5500 },
+            { code: "sg", name: "Singapore", flag: "🇸🇬", price: 4500 },
+            { code: "my", name: "Malaysia", flag: "🇲🇾", price: 4000 },
+            { code: "in", name: "India", flag: "🇮🇳", price: 3500 },
+            { code: "ph", name: "Philippines", flag: "🇵🇭", price: 3800 },
+            { code: "th", name: "Thailand", flag: "🇹🇭", price: 4200 },
+            { code: "vn", name: "Vietnam", flag: "🇻🇳", price: 4000 },
+            { code: "au", name: "Australia", flag: "🇦🇺", price: 6000 }
         ];
 
-        function generateApiKey(username) { return 'XYRO-' + username.toUpperCase() + '-' + Math.random().toString(36).substring(2, 10).toUpperCase(); }
+        // OTP Services
+        const otpServices = [
+            { id: 1, name: "WhatsApp", icon: "fab fa-whatsapp", enabled: true },
+            { id: 2, name: "Telegram", icon: "fab fa-telegram", enabled: true },
+            { id: 3, name: "Google", icon: "fab fa-google", enabled: true },
+            { id: 4, name: "Instagram", icon: "fab fa-instagram", enabled: true },
+            { id: 5, name: "Facebook", icon: "fab fa-facebook", enabled: true },
+            { id: 6, name: "TikTok", icon: "fab fa-tiktok", enabled: true },
+            { id: 7, name: "Twitter", icon: "fab fa-twitter", enabled: true },
+            { id: 8, name: "Discord", icon: "fab fa-discord", enabled: true },
+            { id: 9, name: "Microsoft", icon: "fab fa-microsoft", enabled: true },
+            { id: 10, name: "Snapchat", icon: "fab fa-snapchat", enabled: true }
+        ];
+
+        // SMM Categories & Services
+        const smmData = {
+            instagram: { name: "Instagram", icon: "fab fa-instagram", services: [{ id: 101, name: "Followers", price: 25000, min: 100 },{ id: 102, name: "Likes", price: 5000, min: 50 },{ id: 103, name: "Views", price: 3000, min: 100 }] },
+            tiktok: { name: "TikTok", icon: "fab fa-tiktok", services: [{ id: 201, name: "Followers", price: 30000, min: 100 },{ id: 202, name: "Likes", price: 7000, min: 50 },{ id: 203, name: "Views", price: 5000, min: 100 }] },
+            facebook: { name: "Facebook", icon: "fab fa-facebook", services: [{ id: 301, name: "Followers", price: 20000, min: 100 },{ id: 302, name: "Likes", price: 15000, min: 50 }] },
+            youtube: { name: "YouTube", icon: "fab fa-youtube", services: [{ id: 401, name: "Subscribers", price: 35000, min: 10 },{ id: 402, name: "Views", price: 8000, min: 100 }] },
+            twitter: { name: "Twitter", icon: "fab fa-twitter", services: [{ id: 501, name: "Followers", price: 22000, min: 100 },{ id: 502, name: "Likes", price: 6000, min: 50 }] }
+        };
+
+        function generateApiKey(username) { return 'XYRO-' + username.toUpperCase() + '-' + Math.random().toString(36).substring(2, 10).toUpperCase() + '-' + Date.now().toString(36).toUpperCase(); }
         function getUsers() { return JSON.parse(localStorage.getItem('xyro_users') || '[]'); }
         function saveUsers(users) { localStorage.setItem('xyro_users', JSON.stringify(users)); }
 
@@ -163,6 +250,8 @@
         function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
         function showLoginForm() { document.getElementById('loginForm').style.display = 'block'; document.getElementById('registerForm').style.display = 'none'; document.getElementById('authTitle').innerText = 'Login XYRO OTP'; }
         function showRegisterForm() { document.getElementById('loginForm').style.display = 'none'; document.getElementById('registerForm').style.display = 'block'; document.getElementById('authTitle').innerText = 'Daftar Akun'; }
+        function showApiDocsLanding() { document.getElementById('apiDocsModal').style.display = 'flex'; }
+        function closeApiDocsModal() { document.getElementById('apiDocsModal').style.display = 'none'; }
         function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
 
         function handleRegister() {
@@ -173,7 +262,7 @@
             const users = getUsers();
             if (users.find(u => u.username === username)) { document.getElementById('authAlert').innerHTML = '<div class="alert-error">Username sudah terdaftar!</div>'; return; }
             const apiKey = generateApiKey(username);
-            users.push({ id: Date.now(), username, email, password, balance: 0, orders: [], totalDeposit: 0, totalRefund: 0, apiKey });
+            users.push({ id: Date.now(), username, email, password, balance: 0, orders: [], smmOrders: [], totalDeposit: 0, totalRefund: 0, apiKey });
             saveUsers(users);
             document.getElementById('authAlert').innerHTML = '<div class="alert-success">✅ Registrasi berhasil! Silakan login.</div>';
             setTimeout(() => showLoginForm(), 1500);
@@ -200,10 +289,14 @@
             document.getElementById('profileUsername').innerText = currentUser.username;
             document.getElementById('profileEmail').innerText = currentUser.email;
             document.getElementById('profileTotalDeposit').innerText = currentUser.totalDeposit || 0;
-            document.getElementById('profileTotalOrder').innerText = (currentUser.orders || []).length;
+            document.getElementById('profileTotalOrder').innerText = (currentUser.orders?.length || 0) + (currentUser.smmOrders?.length || 0);
             document.getElementById('profileTotalRefund').innerText = currentUser.totalRefund || 0;
+            document.getElementById('profileApiKey').innerText = currentUser.apiKey || generateApiKey(currentUser.username);
+            document.getElementById('dashboardApiKey').innerText = currentUser.apiKey || generateApiKey(currentUser.username);
             renderServers();
-            renderServices();
+            renderCountries();
+            renderOtpServices();
+            renderSmmCategories();
             renderHistory();
         }
 
@@ -212,41 +305,59 @@
             if (!container) return;
             container.innerHTML = '';
             for (let i = 1; i <= 10; i++) {
-                const isActive = selectedServer === i;
-                container.innerHTML += `<div class="server-card ${isActive ? 'active' : ''}" onclick="selectServer(${i})"><i class="fas fa-server"></i><br>Server ${i}</div>`;
+                container.innerHTML += `<div class="server-card ${selectedServer === i ? 'active' : ''}" onclick="selectServer(${i})"><i class="fas fa-server"></i><br>Server ${i}</div>`;
             }
         }
         function selectServer(server) { selectedServer = server; renderServers(); }
 
-        function renderServices() {
-            const container = document.getElementById('serviceGrid');
+        function renderCountries() {
+            const container = document.getElementById('countryGrid');
             if (!container) return;
             container.innerHTML = '';
-            servicesList.forEach(svc => {
-                const isSelected = selectedService === svc.id;
-                container.innerHTML += `<div class="service-card ${isSelected ? 'selected' : ''}" onclick="selectService(${svc.id})"><i class="${svc.icon}" style="font-size:24px;"></i><br><strong>${svc.name}</strong><br>Rp ${svc.price.toLocaleString()}</div>`;
+            countries.forEach(c => {
+                container.innerHTML += `<div class="country-card ${selectedCountry === c.code ? 'active' : ''}" onclick="selectCountry('${c.code}')">${c.flag}<br>${c.name}</div>`;
             });
         }
-        function selectService(id) { selectedService = id; renderServices(); }
+        function selectCountry(code) { selectedCountry = code; renderCountries(); }
+
+        function renderOtpServices() {
+            const container = document.getElementById('otpServiceGrid');
+            if (!container) return;
+            container.innerHTML = '';
+            otpServices.forEach(svc => {
+                const countryPrice = countries.find(c => c.code === selectedCountry)?.price || 2500;
+                container.innerHTML += `<div class="service-card ${selectedOtpService === svc.id ? 'selected' : ''}" onclick="selectOtpService(${svc.id})"><i class="${svc.icon}" style="font-size:24px;"></i><br><strong>${svc.name}</strong><br>Rp ${countryPrice.toLocaleString()}</div>`;
+            });
+        }
+        function selectOtpService(id) { selectedOtpService = id; renderOtpServices(); }
+
+        function renderSmmCategories() {
+            const container = document.getElementById('smmCategoryGrid');
+            if (!container) return;
+            container.innerHTML = '';
+            Object.keys(smmData).forEach(cat => {
+                container.innerHTML += `<div class="smm-card ${selectedSmmCategory === cat ? 'selected' : ''}" onclick="selectSmmCategory('${cat}')"><i class="${smmData[cat].icon}" style="font-size:24px;"></i><br>${smmData[cat].name}</div>`;
+            });
+        }
+        function selectSmmCategory(cat) {
+            selectedSmmCategory = cat;
+            selectedSmmService = null;
+            renderSmmCategories();
+            const container = document.getElementById('smmServiceGrid');
+            container.innerHTML = '';
+            smmData[cat].services.forEach(svc => {
+                container.innerHTML += `<div class="service-card" onclick="selectSmmService(${svc.id}, '${svc.name}', ${svc.price})"><strong>${svc.name}</strong><br>Rp ${svc.price.toLocaleString()}<br><small>Min: ${svc.min}</small></div>`;
+            });
+        }
+        function selectSmmService(id, name, price) { selectedSmmService = { id, name, price }; document.getElementById('smmPriceInfo').innerHTML = `<strong>${name}</strong><br>Harga: Rp ${price.toLocaleString()} / unit`; }
 
         function processDeposit() {
             let amount = parseInt(document.getElementById('depositAmount').value);
             if (!amount || amount < 10000) { alert('Minimal deposit Rp 10.000'); return; }
-            
             const qrContainer = document.getElementById('qrcodeDeposit');
             qrContainer.innerHTML = '';
-            
-            // FORMAT QRIS YANG BENAR - Ganti dengan data QRIS asli Anda
-            const merchantId = "XYRO123456"; // Ganti dengan Merchant ID real Anda
-            const merchantName = "XYRO OTP";
-            const city = "JAKARTA";
-            // Format standar QRIS
-            const qrisData = `00020101021126690016COM.BCA.QRIS0115${merchantId}53036005802ID5914${merchantName}6009${city}6105123456208023QRIS${amount}6304XXXX`;
-            
-            new QRCode(qrContainer, { text: qrisData, width: 180, height: 180 });
-            document.getElementById('depositMsg').innerHTML = '<div class="loading"></div> Menunggu pembayaran... (simulasi 5 detik)';
-            
-            // SIMULASI AUTO DETECT PEMBAYARAN - Saldo auto masuk
+            new QRCode(qrContainer, { text: `QRIS://xyro.deposit?user=${currentUser.username}&amount=${amount}`, width: 180, height: 180 });
+            document.getElementById('depositMsg').innerHTML = '<div class="loading"></div> Menunggu pembayaran... (5 detik)';
             setTimeout(() => {
                 currentUser.balance += amount;
                 currentUser.totalDeposit = (currentUser.totalDeposit || 0) + amount;
@@ -259,69 +370,85 @@
             }, 5000);
         }
 
-        async function placeOrder() {
-            if (!selectedServer) { alert('Pilih server terlebih dahulu!'); return; }
-            if (!selectedService) { alert('Pilih layanan!'); return; }
-            const service = servicesList.find(s => s.id === selectedService);
-            if (currentUser.balance < service.price) { alert(`Saldo tidak cukup! Deposit dulu minimal Rp ${(service.price - currentUser.balance).toLocaleString()}`); return; }
+        async function placeOtpOrder() {
+            if (!selectedServer) { alert('Pilih server!'); return; }
+            if (!selectedOtpService) { alert('Pilih layanan!'); return; }
+            const countryData = countries.find(c => c.code === selectedCountry);
+            const price = countryData.price;
+            if (currentUser.balance < price) { alert(`Saldo tidak cukup! Deposit dulu Rp ${(price - currentUser.balance).toLocaleString()}`); return; }
             
-            document.getElementById('orderBtn').disabled = true;
-            document.getElementById('orderLoading').style.display = 'block';
-            document.getElementById('orderResult').innerHTML = '';
+            document.getElementById('otpOrderBtn').disabled = true;
+            document.getElementById('otpOrderLoading').style.display = 'block';
+            document.getElementById('otpOrderResult').innerHTML = '';
             
             await new Promise(r => setTimeout(r, 1500));
-            
-            // Generate nomor virtual
-            const virtualNum = '62' + Math.floor(8e10 + Math.random() * 9e10).toString().slice(0, 12);
-            const orderId = 'ORD' + Date.now();
+            const virtualNum = countryData.code === 'id' ? '62' + Math.floor(8e10 + Math.random() * 9e10).toString().slice(0, 12) : '+' + Math.floor(1e10 + Math.random() * 9e10).toString();
+            const orderId = 'OTP' + Date.now();
             const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
             
-            // Kurangi saldo
-            currentUser.balance -= service.price;
-            const orderData = { id: orderId, server: selectedServer, service: service.name, phone: virtualNum, price: service.price, status: 'pending', otp: null, time: new Date().toISOString() };
+            currentUser.balance -= price;
+            const orderData = { id: orderId, type: 'otp', server: selectedServer, country: countryData.name, service: otpServices.find(s => s.id === selectedOtpService)?.name, phone: virtualNum, price: price, status: 'pending', otp: null, time: new Date().toISOString() };
             if (!currentUser.orders) currentUser.orders = [];
             currentUser.orders.unshift(orderData);
             updateCurrentUser();
             document.getElementById('dashBalance').innerText = currentUser.balance.toLocaleString();
+            document.getElementById('otpOrderLoading').style.display = 'none';
             
-            document.getElementById('orderLoading').style.display = 'none';
+            document.getElementById('otpOrderResult').innerHTML = `<div class="info-box"><i class="fas fa-phone-alt"></i><h2>${virtualNum}</h2><p>Negara: ${countryData.name} | Layanan: ${orderData.service}</p><div class="loading" style="margin-top:10px;"></div><small>Menunggu OTP (maks 60 detik)</small></div>`;
             
-            // Tampilkan nomor virtual
-            document.getElementById('orderResult').innerHTML = `<div class="info-box"><i class="fas fa-phone-alt"></i><h2>${virtualNum}</h2><p>Nomor Virtual - Menunggu OTP masuk...</p><div class="loading" style="margin-top:10px;"></div><small>Maksimal waktu tunggu 60 detik</small></div>`;
-            
-            // Simulasi penerimaan OTP dengan random success/fail
             let otpReceived = false;
             let attempts = 0;
-            const maxAttempts = 12; // 60 detik / 5 detik
-            
             const interval = setInterval(() => {
                 attempts++;
-                if (!otpReceived && attempts < maxAttempts) {
-                    // 80% success rate, 20% fail
-                    if (Math.random() < 0.8) {
+                if (!otpReceived && attempts < 12) {
+                    if (Math.random() < 0.85) {
                         otpReceived = true;
                         clearInterval(interval);
                         orderData.status = 'success';
                         orderData.otp = otpCode;
                         updateCurrentUser();
-                        document.getElementById('orderResult').innerHTML = `<div class="success-box"><i class="fas fa-check-circle" style="font-size:30px;"></i><h2>${otpCode}</h2><p>✅ OTP BERHASIL! Kode verifikasi: ${otpCode}</p><p>Waktu: ${new Date().toLocaleTimeString()}</p><p>Nomor: ${virtualNum}</p></div>`;
-                        addHistory(`✅ Order #${orderId}: ${service.name} - ${virtualNum} - OTP: ${otpCode}`, 'success');
-                        document.getElementById('orderBtn').disabled = false;
+                        document.getElementById('otpOrderResult').innerHTML = `<div class="success-box"><i class="fas fa-check-circle" style="font-size:30px;"></i><h2>${otpCode}</h2><p>✅ OTP BERHASIL! Kode: ${otpCode}</p><p>Nomor: ${virtualNum}</p></div>`;
+                        addHistory(`✅ OTP Order #${orderId}: ${orderData.service} (${countryData.name}) - ${virtualNum} - OTP: ${otpCode}`, 'success');
+                        document.getElementById('otpOrderBtn').disabled = false;
                     }
-                } else if (!otpReceived && attempts >= maxAttempts) {
+                } else if (!otpReceived && attempts >= 12) {
                     clearInterval(interval);
-                    // AUTO REFUND - Saldo dikembalikan
-                    currentUser.balance += service.price;
-                    currentUser.totalRefund = (currentUser.totalRefund || 0) + service.price;
+                    currentUser.balance += price;
+                    currentUser.totalRefund = (currentUser.totalRefund || 0) + price;
                     orderData.status = 'failed';
                     updateCurrentUser();
                     document.getElementById('dashBalance').innerText = currentUser.balance.toLocaleString();
                     document.getElementById('profileTotalRefund').innerText = currentUser.totalRefund;
-                    document.getElementById('orderResult').innerHTML = `<div class="failed-box"><i class="fas fa-times-circle" style="font-size:30px;"></i><h2>OTP GAGAL!</h2><p>❌ Waktu habis, OTP tidak masuk dalam 60 detik.</p><p>💰 Saldo Rp ${service.price.toLocaleString()} telah DIREFUND otomatis ke akun Anda.</p><p>Silakan coba order ulang dengan server yang berbeda.</p></div>`;
-                    addHistory(`❌ Order #${orderId}: ${service.name} - ${virtualNum} - GAGAL - Auto refund Rp ${service.price.toLocaleString()}`, 'error');
-                    document.getElementById('orderBtn').disabled = false;
+                    document.getElementById('otpOrderResult').innerHTML = `<div class="failed-box"><i class="fas fa-times-circle" style="font-size:30px;"></i><h2>OTP GAGAL!</h2><p>💰 Auto refund Rp ${price.toLocaleString()} ke saldo Anda</p></div>`;
+                    addHistory(`❌ OTP Order #${orderId}: GAGAL - Auto refund Rp ${price.toLocaleString()}`, 'error');
+                    document.getElementById('otpOrderBtn').disabled = false;
                 }
             }, 5000);
+        }
+
+        async function placeSmmOrder() {
+            if (!selectedSmmCategory || !selectedSmmService) { alert('Pilih layanan SMM!'); return; }
+            const target = document.getElementById('smmTarget').value;
+            const quantity = parseInt(document.getElementById('smmQuantity').value);
+            if (!target) { alert('Masukkan target!'); return; }
+            if (!quantity || quantity < 10) { alert('Minimal 10!'); return; }
+            const totalPrice = selectedSmmService.price * quantity;
+            if (currentUser.balance < totalPrice) { alert(`Saldo tidak cukup! Butuh Rp ${totalPrice.toLocaleString()}`); return; }
+            
+            currentUser.balance -= totalPrice;
+            const orderId = 'SMM' + Date.now();
+            const smmOrder = { id: orderId, type: 'smm', service: `${smmData[selectedSmmCategory].name} ${selectedSmmService.name}`, target, quantity, price: totalPrice, status: 'processing', time: new Date().toISOString() };
+            if (!currentUser.smmOrders) currentUser.smmOrders = [];
+            currentUser.smmOrders.unshift(smmOrder);
+            if (!currentUser.orders) currentUser.orders = [];
+            currentUser.orders.unshift(smmOrder);
+            updateCurrentUser();
+            document.getElementById('dashBalance').innerText = currentUser.balance.toLocaleString();
+            document.getElementById('smmOrderResult').innerHTML = `<div class="success-box"><i class="fas fa-check-circle"></i><p>✅ Order SMM berhasil! Order ID: ${orderId}</p><p>Status: Processing (1-24 jam)</p></div>`;
+            addHistory(`📊 SMM Order #${orderId}: ${smmOrder.service} - ${target} - ${quantity} pcs - Rp ${totalPrice.toLocaleString()}`, 'success');
+            setTimeout(() => document.getElementById('smmOrderResult').innerHTML = '', 5000);
+            document.getElementById('smmTarget').value = '';
+            document.getElementById('smmQuantity').value = '';
         }
 
         function updateCurrentUser() {
@@ -341,14 +468,17 @@
             const historyList = document.getElementById('historyList');
             if (!historyList) return;
             historyList.innerHTML = '';
-            if (currentUser.orders && currentUser.orders.length > 0) {
-                currentUser.orders.forEach(o => {
-                    const statusText = o.status === 'success' ? '✅ BERHASIL' : '❌ GAGAL';
+            const allOrders = [...(currentUser.orders || []), ...(currentUser.smmOrders || [])].sort((a,b) => new Date(b.time) - new Date(a.time));
+            if (allOrders.length > 0) {
+                allOrders.forEach(o => {
+                    const statusText = o.status === 'success' ? '✅' : (o.status === 'failed' ? '❌' : '⏳');
                     const otpText = o.otp ? ` - OTP: ${o.otp}` : '';
-                    historyList.innerHTML += `<div class="activity-item">${statusText} [${new Date(o.time).toLocaleString()}] ${o.service} - ${o.phone} - Rp ${o.price.toLocaleString()}${otpText}</div>`;
+                    historyList.innerHTML += `<div class="activity-item">${statusText} [${new Date(o.time).toLocaleString()}] ${o.service || o.name} - ${o.phone || o.target} - Rp ${o.price?.toLocaleString()}${otpText}</div>`;
                 });
             } else { historyList.innerHTML = '<div class="activity-item">Belum ada transaksi</div>'; }
         }
+
+        function copyDashboardApiKey() { const apiKey = document.getElementById('dashboardApiKey').innerText; navigator.clipboard.writeText(apiKey); alert('API Key disalin!'); }
 
         function switchTab(tab) {
             document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
@@ -356,7 +486,7 @@
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
             if (tab === 'history') renderHistory();
-            if (tab === 'buy') { renderServers(); renderServices(); }
+            if (tab === 'otp') { renderServers(); renderCountries(); renderOtpServices(); }
         }
 
         document.querySelectorAll('.tab-btn').forEach(btn => { btn.onclick = () => switchTab(btn.dataset.tab); });
