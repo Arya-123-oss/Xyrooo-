@@ -15,8 +15,10 @@
         .landing-page { min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; flex-wrap: wrap; gap: 20px; }
         .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { background: white; width: 45px; height: 45px; border-radius: 25px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #667eea; }
+        .logo-icon { background: white; width: 45px; height: 45px; border-radius: 25px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #667eea; order: 2; }
+        .logo-text { order: 1; }
         .logo h1 { color: white; font-size: 1.8rem; }
+        .logo p { color: rgba(255,255,255,0.8); font-size: 0.8rem; }
         .nav-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
         .nav-links a { color: white; text-decoration: none; font-weight: 500; cursor: pointer; }
         .btn-login-nav { background: white; color: #667eea !important; padding: 10px 25px; border-radius: 30px; font-weight: 600 !important; }
@@ -26,12 +28,20 @@
         .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
         .btn-primary { background: white; color: #667eea; padding: 12px 30px; border-radius: 40px; font-weight: 700; border: none; cursor: pointer; }
         .btn-outline { border: 2px solid white; color: white; padding: 12px 30px; border-radius: 40px; background: transparent; cursor: pointer; }
+        .hero-image { flex: 1; text-align: center; }
         .hero-image i { font-size: 200px; color: rgba(255,255,255,0.9); }
         .features { background: white; padding: 60px 50px; text-align: center; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
         .feature-card { padding: 30px; border-radius: 24px; background: #f8fafc; transition: 0.3s; }
         .feature-card i { font-size: 50px; color: #667eea; margin-bottom: 20px; }
         .footer { background: #1a1a2e; color: white; text-align: center; padding: 40px; }
+
+        /* Payment Info Box */
+        .payment-info { background: linear-gradient(135deg, #1a1a2e, #2d2d5e); border-radius: 24px; padding: 25px; margin: 30px auto; max-width: 500px; text-align: center; border: 1px solid #00ff88; }
+        .payment-info h3 { color: #00ff88; margin-bottom: 15px; }
+        .payment-detail { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 16px; margin: 10px 0; font-family: monospace; }
+        .payment-detail i { margin-right: 10px; color: #00ff88; }
+        .warning-text { color: #fbbf24; font-size: 12px; margin-top: 10px; }
 
         /* Modal */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
@@ -47,6 +57,9 @@
         .dashboard { display: none; background: #f0f2f5; min-height: 100vh; }
         .dashboard-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
         .top-bar { background: white; border-radius: 24px; padding: 15px 25px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .dashboard-logo { display: flex; align-items: center; gap: 12px; }
+        .dashboard-logo-icon { background: linear-gradient(135deg, #667eea, #764ba2); width: 45px; height: 45px; border-radius: 25px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: white; order: 2; }
+        .dashboard-logo-text { order: 1; }
         .balance-card { background: linear-gradient(135deg, #667eea, #764ba2); padding: 10px 25px; border-radius: 40px; color: white; font-weight: 700; }
         .logout-btn { background: #ef4444; color: white; border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; }
         .nav-tabs { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
@@ -81,7 +94,6 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .deposit-area { text-align: center; }
         #qrcodeDeposit { display: inline-flex; justify-content: center; padding: 15px; background: white; border-radius: 20px; margin: 20px 0; }
-        .countdown { font-family: monospace; font-size: 24px; font-weight: bold; color: #ef4444; }
         
         @media (max-width: 768px) { .navbar, .hero { padding: 20px; } .hero-content h1 { font-size: 2rem; } }
     </style>
@@ -90,7 +102,10 @@
     <!-- Landing Page -->
     <div id="landingPage" class="landing-page">
         <div class="navbar">
-            <div class="logo"><div class="logo-icon"><i class="fas fa-bolt"></i></div><div><h1>XYRO OTP</h1><p>API SMM & Nokos Global</p></div></div>
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <div class="logo-text"><h1>XYRO OTP</h1><p>API SMM & Nokos Global</p></div>
+            </div>
             <div class="nav-links"><a onclick="scrollToSection('home')">Beranda</a><a onclick="scrollToSection('features')">Fitur</a><a onclick="showApiDocsLanding()">Docs API</a><a class="btn-login-nav" onclick="openLoginModal()">Login</a></div>
         </div>
         <div class="hero">
@@ -99,6 +114,17 @@
             </div>
             <div class="hero-image"><i class="fas fa-globe-asia"></i></div>
         </div>
+
+        <!-- Payment Info Box -->
+        <div class="payment-info">
+            <h3><i class="fas fa-info-circle"></i> INFO PEMBAYARAN</h3>
+            <div class="payment-detail"><i class="fab fa-whatsapp"></i> 0838-0538-5608</div>
+            <div class="payment-detail"><i class="fab fa-telegram"></i> @heyyarya122</div>
+            <div class="payment-detail"><i class="fas fa-store"></i> STORE ID: ARYASTOREID</div>
+            <div class="payment-detail"><i class="fas fa-user"></i> A/N: ARYASTORE</div>
+            <div class="warning-text"><i class="fas fa-exclamation-triangle"></i> JANGAN LUPA SERTAKAN BUKTI PEMBAYARANNYA!</div>
+        </div>
+
         <div class="features" id="features"><h2>Fitur Unggulan</h2>
             <div class="feature-grid">
                 <div class="feature-card"><i class="fas fa-qrcode"></i><h3>Auto Deposit QRIS</h3><p>Scan QRIS, saldo auto masuk</p></div>
@@ -123,100 +149,54 @@
             <code>https://xyro-otp.api/v1</code>
             <h3 style="color:#667eea;">🔑 Authentication</h3>
             <code>Headers: { "X-API-Key": "YOUR_API_KEY", "Content-Type": "application/json" }</code>
-            
-            <h3 style="color:#667eea; margin-top:20px;">📨 1. API Nokos (Virtual Number)</h3>
+            <h3 style="color:#667eea; margin-top:20px;">📱 API Nokos (Virtual Number)</h3>
             <code>POST /nokos/order
-Body: {
-  "country": "id|us|gb|sg|my",
-  "service": "whatsapp|telegram|google"
-}
-Response: {
-  "status": "success",
-  "order_id": "NOK123456",
-  "phone": "628123456789",
-  "expires": 300
-}
-
-GET /nokos/otp/{order_id}
-Response: {
-  "status": "success",
-  "otp": "123456",
-  "received": true
-}</code>
-
-            <h3 style="color:#667eea; margin-top:20px;">📊 2. API SMM (Social Media Marketing)</h3>
+Body: {"country":"id","service":"whatsapp"}
+Response: {"order_id":"NOK123","phone":"628123456789"}</code>
+            <h3 style="color:#667eea; margin-top:20px;">📊 API SMM</h3>
             <code>POST /smm/order
-Body: {
-  "service": "instagram_followers|tiktok_followers|facebook_likes|youtube_subscribers",
-  "target": "username_or_url",
-  "quantity": 1000
-}
-Response: {
-  "status": "success",
-  "order_id": "SMM123456",
-  "price": 25000,
-  "start_count": 100
-}
-
-GET /smm/status/{order_id}
-Response: {
-  "status": "success",
-  "order_status": "completed",
-  "current_count": 1100
-}</code>
-
-            <h3 style="color:#667eea; margin-top:20px;">💰 3. API Balance & User</h3>
-            <code>GET /balance
-Response: {"status":"success","balance":50000}
-
-GET /profile
-Response: {"username":"user","email":"user@mail.com","total_order":10}</code>
-
-            <h3 style="color:#667eea; margin-top:20px;">🌍 4. Available Countries & Services</h3>
-            <code>GET /countries
-GET /services/otp
-GET /services/smm</code>
-            <p style="margin-top:20px;">📞 Support: wa.me/628123456789 | Telegram: @xyrosupport</p>
-            <p style="margin-top:10px;">✅ API dapat diakses tanpa VPS | Support cURL, Python, JavaScript, Postman</p>
+Body: {"service":"instagram_followers","target":"username","quantity":1000}</code>
+            <p style="margin-top:20px;">📞 Support: 0838-0538-5608 | Telegram: @heyyarya122</p>
         </div>
     </div></div>
 
     <!-- Dashboard -->
     <div id="dashboard" class="dashboard"><div class="dashboard-container">
-        <div class="top-bar"><div class="logo" style="color:#1a1a2e;"><div class="logo-icon" style="background:linear-gradient(135deg, #667eea, #764ba2); color:white;"><i class="fas fa-bolt"></i></div><div><h2 style="font-size:1.3rem;">XYRO OTP</h2><small>API SMM & Nokos</small></div></div>
-        <div style="display:flex; gap:15px; align-items:center;"><div class="balance-card">💰 Saldo: Rp <span id="dashBalance">0</span></div><button class="logout-btn" onclick="logout()">Logout</button></div></div>
+        <div class="top-bar">
+            <div class="dashboard-logo">
+                <div class="dashboard-logo-icon"><i class="fas fa-bolt"></i></div>
+                <div class="dashboard-logo-text"><h2 style="font-size:1.3rem;">XYRO OTP</h2><small>API SMM & Nokos</small></div>
+            </div>
+            <div style="display:flex; gap:15px; align-items:center;"><div class="balance-card">💰 Saldo: Rp <span id="dashBalance">0</span></div><button class="logout-btn" onclick="logout()">Logout</button></div>
+        </div>
 
-        <div class="nav-tabs"><button class="tab-btn active" data-tab="home">🏠 Home</button><button class="tab-btn" data-tab="deposit">💳 Deposit QRIS</button><button class="tab-btn" data-tab="nokos">📱 Virtual Number (Nokos)</button><button class="tab-btn" data-tab="smm">📊 SMM Panel</button><button class="tab-btn" data-tab="api">🔑 API Key</button><button class="tab-btn" data-tab="history">📋 History</button><button class="tab-btn" data-tab="profile">👤 Profile</button></div>
+        <div class="nav-tabs"><button class="tab-btn active" data-tab="home">🏠 Home</button><button class="tab-btn" data-tab="deposit">💳 Deposit QRIS</button><button class="tab-btn" data-tab="nokos">📱 Virtual Number</button><button class="tab-btn" data-tab="smm">📊 SMM Panel</button><button class="tab-btn" data-tab="api">🔑 API Key</button><button class="tab-btn" data-tab="history">📋 History</button><button class="tab-btn" data-tab="profile">👤 Profile</button></div>
 
         <!-- Home Tab -->
         <div id="tab-home" class="tab-content"><div style="background:linear-gradient(135deg, #667eea, #764ba2); border-radius:24px; padding:30px; color:white; margin-bottom:25px;"><h2>XYRO OTP - Complete API Platform</h2><p>API Nokos (Virtual Number) | API SMM | Auto Deposit QRIS</p><button class="btn-primary" style="background:white; color:#667eea; margin-top:15px;" onclick="switchTab('nokos')">Order Virtual Number</button><button class="btn-outline" style="border-color:white; color:white; margin-left:10px;" onclick="switchTab('smm')">Order SMM</button></div>
-        <div class="activity-log"><h3>📢 Info API</h3><div class="activity-item">🌐 Base URL: https://xyro-otp.api/v1</div><div class="activity-item">📱 API Nokos: Dapatkan nomor virtual untuk terima OTP</div><div class="activity-item">📊 API SMM: Order followers, likes, views berbagai platform</div><div class="activity-item">💰 Auto refund jika OTP tidak masuk dalam 60 detik</div></div></div>
+        <div class="activity-log"><h3>📢 Info Kontak</h3><div class="activity-item">📞 WhatsApp: 0838-0538-5608</div><div class="activity-item">📱 Telegram: @heyyarya122</div><div class="activity-item">🏪 Store ID: ARYASTOREID</div><div class="activity-item">👤 A/N: ARYASTORE</div></div></div>
 
         <!-- Deposit QRIS Tab -->
         <div id="tab-deposit" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px; text-align:center;"><h3>Deposit Saldo via QRIS</h3><p>Minimal: Rp 10.000 | Auto detect pembayaran</p><div id="qrcodeDeposit"></div><input type="number" id="depositAmount" class="auth-input" placeholder="Nominal Deposit" style="margin:15px 0;"><button class="btn-primary" onclick="generateQRIS()">Generate QRIS</button><div id="depositMsg" style="margin-top:15px;"></div><div id="countdownTimer" style="margin-top:10px;"></div></div></div>
 
-        <!-- Nokos (Virtual Number) Tab -->
+        <!-- Nokos Tab -->
         <div id="tab-nokos" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>📱 Virtual Number (Nokos)</h3><div class="server-grid" id="serverGridNokos"></div><div class="country-grid" id="countryGridNokos"></div><div class="service-grid" id="nokosServiceGrid"></div><div class="order-section"><div id="nokosOrderLoading" style="display:none; text-align:center; padding:20px;"><div class="loading"></div> Memproses order...</div><div id="nokosOrderResult"></div><button id="nokosOrderBtn" class="btn-order" onclick="placeNokosOrder()">Order Virtual Number</button></div></div></div>
 
-        <!-- SMM Panel Tab -->
+        <!-- SMM Tab -->
         <div id="tab-smm" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>📊 Social Media Marketing (API SMM)</h3><div class="smm-grid" id="smmCategoryGrid"></div><div id="smmServiceGrid" class="service-grid"></div><div class="order-section"><input type="text" id="smmTarget" class="auth-input" placeholder="Target (Username/URL/ID)"><input type="number" id="smmQuantity" class="auth-input" placeholder="Jumlah"><div id="smmPriceInfo" style="margin:10px 0; padding:10px; background:#f1f5f9; border-radius:16px;"></div><button class="btn-order" onclick="placeSmmOrder()">Order SMM Sekarang</button><div id="smmOrderResult"></div></div></div></div>
 
-        <!-- API Key Tab -->
+        <!-- API Tab -->
         <div id="tab-api" class="tab-content" style="display:none;"><div class="api-doc"><h3><i class="fas fa-key"></i> API Key Pribadi Anda</h3><div class="api-key-display"><span id="dashboardApiKey" style="color:#00ff88;">-</span><button class="copy-btn" onclick="copyDashboardApiKey()">Salin API Key</button></div>
         <h3>🌐 Base URL</h3><code>https://xyro-otp.api/v1</code>
-        <h3>📱 API Nokos (Virtual Number)</h3><code>POST /nokos/order - Order nomor virtual
-GET /nokos/otp/{id} - Ambil OTP</code>
-        <h3>📊 API SMM</h3><code>POST /smm/order - Order SMM
-GET /smm/status/{id} - Cek status</code>
-        <h3>💰 API Balance</h3><code>GET /balance - Cek saldo
-GET /profile - Info profil</code>
-        <p style="margin-top:20px;">✅ API dapat diakses dari mana saja (Postman, cURL, Python, JavaScript)</p></div></div>
+        <h3>📱 API Nokos</h3><code>POST /nokos/order - Order nomor virtual</code>
+        <h3>📊 API SMM</h3><code>POST /smm/order - Order SMM</code>
+        <h3>💰 API Balance</h3><code>GET /balance - Cek saldo</code></div></div>
 
         <!-- History Tab -->
         <div id="tab-history" class="tab-content" style="display:none;"><div class="activity-log" id="historyList"><div class="activity-item">Belum ada transaksi</div></div></div>
 
         <!-- Profile Tab -->
-        <div id="tab-profile" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>Profil Saya</h3><p><strong>Username:</strong> <span id="profileUsername"></span></p><p><strong>Email:</strong> <span id="profileEmail"></span></p><p><strong>Total Deposit:</strong> Rp <span id="profileTotalDeposit">0</span></p><p><strong>Total Order:</strong> <span id="profileTotalOrder">0</span></p><p><strong>Total Refund:</strong> Rp <span id="profileTotalRefund">0</span></p><p><strong>API Key:</strong> <span id="profileApiKey" style="font-family:monospace;">-</span></p><hr style="margin:20px 0;"><h4>📞 Kontak Support</h4><p>WhatsApp: <a href="https://wa.me/628123456789">+62 812-3456-789</a></p><p>Telegram: <a href="https://t.me/xyrosupport">@xyrosupport</a></p></div></div>
+        <div id="tab-profile" class="tab-content" style="display:none;"><div style="background:white; border-radius:24px; padding:25px;"><h3>Profil Saya</h3><p><strong>Username:</strong> <span id="profileUsername"></span></p><p><strong>Email:</strong> <span id="profileEmail"></span></p><p><strong>Total Deposit:</strong> Rp <span id="profileTotalDeposit">0</span></p><p><strong>Total Order:</strong> <span id="profileTotalOrder">0</span></p><p><strong>Total Refund:</strong> Rp <span id="profileTotalRefund">0</span></p><p><strong>API Key:</strong> <span id="profileApiKey" style="font-family:monospace;">-</span></p><hr style="margin:20px 0;"><h4>📞 Kontak Support</h4><p>WhatsApp: <a href="https://wa.me/6283805385608">0838-0538-5608</a></p><p>Telegram: <a href="https://t.me/heyyarya122">@heyyarya122</a></p><p>Store ID: ARYASTOREID</p></div></div>
     </div></div>
 
     <script>
@@ -226,9 +206,8 @@ GET /profile - Info profil</code>
         let selectedNokosService = null;
         let selectedSmmCategory = null;
         let selectedSmmService = null;
-        let activePaymentInterval = null;
+        let activePaymentTimeout = null;
 
-        // Countries Data
         const countries = [
             { code: "id", name: "Indonesia", flag: "🇮🇩", price: 2500 },
             { code: "us", name: "United States", flag: "🇺🇸", price: 5000 },
@@ -237,21 +216,17 @@ GET /profile - Info profil</code>
             { code: "my", name: "Malaysia", flag: "🇲🇾", price: 4000 }
         ];
 
-        // Nokos Services (Virtual Number)
         const nokosServices = [
             { id: 1, name: "WhatsApp", icon: "fab fa-whatsapp" },
             { id: 2, name: "Telegram", icon: "fab fa-telegram" },
             { id: 3, name: "Google", icon: "fab fa-google" },
-            { id: 4, name: "Instagram", icon: "fab fa-instagram" },
-            { id: 5, name: "Facebook", icon: "fab fa-facebook" }
+            { id: 4, name: "Instagram", icon: "fab fa-instagram" }
         ];
 
-        // SMM Data
         const smmData = {
             instagram: { name: "Instagram", icon: "fab fa-instagram", services: [{ id: 101, name: "Followers", price: 25000, min: 100 },{ id: 102, name: "Likes", price: 5000, min: 50 }] },
             tiktok: { name: "TikTok", icon: "fab fa-tiktok", services: [{ id: 201, name: "Followers", price: 30000, min: 100 },{ id: 202, name: "Likes", price: 7000, min: 50 }] },
-            facebook: { name: "Facebook", icon: "fab fa-facebook", services: [{ id: 301, name: "Followers", price: 20000, min: 100 }] },
-            youtube: { name: "YouTube", icon: "fab fa-youtube", services: [{ id: 401, name: "Subscribers", price: 35000, min: 10 }] }
+            facebook: { name: "Facebook", icon: "fab fa-facebook", services: [{ id: 301, name: "Followers", price: 20000, min: 100 }] }
         };
 
         function generateApiKey(username) { return 'XYRO-' + username.toUpperCase() + '-' + Math.random().toString(36).substring(2, 10).toUpperCase() + '-' + Date.now().toString(36).toUpperCase(); }
@@ -330,14 +305,14 @@ GET /profile - Info profil</code>
                 container.innerHTML += `<div class="country-card ${selectedCountryNokos === c.code ? 'active' : ''}" onclick="selectNokosCountry('${c.code}')">${c.flag}<br>${c.name}<br><small>Rp ${c.price}</small></div>`;
             });
         }
-        function selectNokosCountry(code) { selectedCountryNokos = code; renderNokosCountries(); }
+        function selectNokosCountry(code) { selectedCountryNokos = code; renderNokosCountries(); renderNokosServices(); }
 
         function renderNokosServices() {
             const container = document.getElementById('nokosServiceGrid');
             if (!container) return;
             container.innerHTML = '';
+            const price = countries.find(c => c.code === selectedCountryNokos)?.price || 2500;
             nokosServices.forEach(svc => {
-                const price = countries.find(c => c.code === selectedCountryNokos)?.price || 2500;
                 container.innerHTML += `<div class="service-card ${selectedNokosService === svc.id ? 'selected' : ''}" onclick="selectNokosService(${svc.id})"><i class="${svc.icon}" style="font-size:24px;"></i><br><strong>${svc.name}</strong><br>Rp ${price.toLocaleString()}</div>`;
             });
         }
@@ -363,15 +338,14 @@ GET /profile - Info profil</code>
         }
         function selectSmmService(id, name, price) { selectedSmmService = { id, name, price }; document.getElementById('smmPriceInfo').innerHTML = `<strong>${name}</strong><br>Harga: Rp ${price.toLocaleString()} / unit`; }
 
-        // Generate QRIS dengan auto detect pembayaran
         function generateQRIS() {
             let amount = parseInt(document.getElementById('depositAmount').value);
             if (!amount || amount < 10000) { alert('Minimal deposit Rp 10.000'); return; }
-            if (activePaymentInterval) clearInterval(activePaymentInterval);
+            if (activePaymentTimeout) clearTimeout(activePaymentTimeout);
             
             const qrContainer = document.getElementById('qrcodeDeposit');
             qrContainer.innerHTML = '';
-            const qrisData = `00020101021126690016COM.QRIS0115XYRO${currentUser.username}53036005802ID5914XYRO%20OTP6009JAKARTA6105123456208023QRIS${amount}6304XXXX`;
+            const qrisData = `QRIS://xyro.deposit?user=${currentUser.username}&amount=${amount}&store=ARYASTOREID`;
             new QRCode(qrContainer, { text: qrisData, width: 200, height: 200 });
             
             let timeLeft = 120;
@@ -383,14 +357,12 @@ GET /profile - Info profil</code>
                 timerElement.innerHTML = `<span class="countdown">⏰ ${Math.floor(timeLeft/60)}:${(timeLeft%60).toString().padStart(2,'0')}</span>`;
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    clearInterval(activePaymentInterval);
-                    document.getElementById('depositMsg').innerHTML = '<span style="color:#ef4444;">❌ Waktu habis! Transaksi dibatalkan. Silakan generate ulang.</span>';
+                    document.getElementById('depositMsg').innerHTML = '<span style="color:#ef4444;">❌ Waktu habis! Transaksi dibatalkan.</span>';
                     timerElement.innerHTML = '';
                 }
             }, 1000);
             
-            // Simulasi auto detect pembayaran (QRIS scan simulation)
-            activePaymentInterval = setTimeout(() => {
+            activePaymentTimeout = setTimeout(() => {
                 clearInterval(timerInterval);
                 currentUser.balance += amount;
                 currentUser.totalDeposit = (currentUser.totalDeposit || 0) + amount;
@@ -441,7 +413,7 @@ GET /profile - Info profil</code>
                         orderData.status = 'success';
                         orderData.otp = otpCode;
                         updateCurrentUser();
-                        document.getElementById('nokosOrderResult').innerHTML = `<div class="success-box"><i class="fas fa-check-circle" style="font-size:30px;"></i><h2>${otpCode}</h2><p>✅ OTP BERHASIL! Kode: ${otpCode}</p><p>Nomor: ${virtualNum}</p><p>Segera gunakan kode OTP sebelum kadaluarsa!</p></div>`;
+                        document.getElementById('nokosOrderResult').innerHTML = `<div class="success-box"><i class="fas fa-check-circle" style="font-size:30px;"></i><h2>${otpCode}</h2><p>✅ OTP BERHASIL! Kode: ${otpCode}</p><p>Nomor: ${virtualNum}</p></div>`;
                         addHistory(`✅ Nokos Order #${orderId}: ${orderData.service} (${countryData.name}) - ${virtualNum} - OTP: ${otpCode}`, 'success');
                         document.getElementById('nokosOrderBtn').disabled = false;
                     }
@@ -453,7 +425,7 @@ GET /profile - Info profil</code>
                     updateCurrentUser();
                     document.getElementById('dashBalance').innerText = currentUser.balance.toLocaleString();
                     document.getElementById('profileTotalRefund').innerText = currentUser.totalRefund;
-                    document.getElementById('nokosOrderResult').innerHTML = `<div class="failed-box"><i class="fas fa-times-circle" style="font-size:30px;"></i><h2>OTP GAGAL!</h2><p>💰 Auto refund Rp ${price.toLocaleString()} ke saldo Anda</p><p>Silakan coba order ulang dengan server berbeda.</p></div>`;
+                    document.getElementById('nokosOrderResult').innerHTML = `<div class="failed-box"><i class="fas fa-times-circle" style="font-size:30px;"></i><h2>OTP GAGAL!</h2><p>💰 Auto refund Rp ${price.toLocaleString()} ke saldo Anda</p></div>`;
                     addHistory(`❌ Nokos Order #${orderId}: GAGAL - Auto refund Rp ${price.toLocaleString()}`, 'error');
                     document.getElementById('nokosOrderBtn').disabled = false;
                 }
@@ -464,7 +436,7 @@ GET /profile - Info profil</code>
             if (!selectedSmmCategory || !selectedSmmService) { alert('Pilih layanan SMM!'); return; }
             const target = document.getElementById('smmTarget').value;
             const quantity = parseInt(document.getElementById('smmQuantity').value);
-            if (!target) { alert('Masukkan target (username/URL)!'); return; }
+            if (!target) { alert('Masukkan target!'); return; }
             if (!quantity || quantity < 10) { alert('Minimal 10!'); return; }
             const totalPrice = selectedSmmService.price * quantity;
             if (currentUser.balance < totalPrice) { alert(`Saldo tidak cukup! Butuh Rp ${totalPrice.toLocaleString()}`); return; }
@@ -478,7 +450,7 @@ GET /profile - Info profil</code>
             currentUser.orders.unshift(smmOrder);
             updateCurrentUser();
             document.getElementById('dashBalance').innerText = currentUser.balance.toLocaleString();
-            document.getElementById('smmOrderResult').innerHTML = `<div class="success-box"><i class="fas fa-check-circle"></i><p>✅ Order SMM berhasil!</p><p>Order ID: ${orderId}</p><p>Status: Processing (1-24 jam)</p><p>Target: ${target} | Jumlah: ${quantity} | Total: Rp ${totalPrice.toLocaleString()}</p></div>`;
+            document.getElementById('smmOrderResult').innerHTML = `<div class="success-box"><i class="fas fa-check-circle"></i><p>✅ Order SMM berhasil! Order ID: ${orderId}</p><p>Status: Processing (1-24 jam)</p></div>`;
             addHistory(`📊 SMM Order #${orderId}: ${smmOrder.service} - ${target} - ${quantity} pcs - Rp ${totalPrice.toLocaleString()}`, 'success');
             setTimeout(() => document.getElementById('smmOrderResult').innerHTML = '', 5000);
             document.getElementById('smmTarget').value = '';
